@@ -1,0 +1,61 @@
+.sustainability {
+  padding: 5rem 6%;
+  background: white;
+  text-align: center;
+}
+
+.sustainability-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.sustainability-images img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.sustainability-images .main-img {
+  width: 220px;
+  height: 220px;
+  z-index: 2;
+}
+
+.sustainability-text {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: var(--forest-ink);
+}
+
+.sustainability-text strong {
+  color: var(--pine-green);
+}
+
+.highlight {
+  color: var(--terracotta);
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .sustainability-images img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .sustainability-images .main-img {
+    width: 160px;
+    height: 160px;
+  }
+
+  .sustainability-text {
+    font-size: 1.1rem;
+  }
+}

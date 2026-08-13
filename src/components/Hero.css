@@ -1,0 +1,149 @@
+@import url("https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap");
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 620px;
+  background-image:
+    linear-gradient(to right, rgba(25, 33, 26, 0.55), rgba(25, 33, 26, 0.25)),
+    url("/hero-kitchen.jpg"); /* ← make sure this matches your image name */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  padding: 0 6%;
+  color: white;
+  padding-top: 90px;
+}
+.hero-content {
+  max-width: 540px;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 500;
+  line-height: 1.15;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 .italic {
+  font-family: "Edu NSW ACT Cursive", cursive;
+  font-weight: 400;
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  max-width: 420px;
+}
+
+.shop-now-btn {
+  background: var(--forest-ink);
+  color: white;
+  padding: 0.85rem 2.2rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  transition: background 0.2s;
+}
+
+.shop-now-btn:hover {
+  background: var(--pine-green);
+}
+.hero-badge {
+  position: absolute;
+  right: 6.5%;
+  bottom: 12%;
+  background: rgba(30, 50, 48, 0.78);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 1.1rem 1.3rem 1rem;
+  color: white;
+  min-width: 138px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.badge-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.badge-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+.badge-leaf {
+  color: #dfe1be;
+  opacity: 0.9;
+  margin-top: 1px;
+}
+
+.badge-percent {
+  font-size: 1.85rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hero {
+    height: 85vh;
+    min-height: 500px;
+    padding: 0 5%;
+    padding-top: 90px;
+    padding-bottom: 3.5rem;
+    align-items: flex-end;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .hero-sub {
+    font-size: 0.95rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .shop-now-btn {
+    padding: 0.75rem 1.6rem;
+    font-size: 0.9rem;
+  }
+
+  .hero-badge {
+    right: 4%;
+    bottom: 5%;
+    padding: 0.8rem 1rem;
+    min-width: 115px;
+  }
+
+  .badge-text {
+    font-size: 0.65rem;
+  }
+
+  .badge-percent {
+    font-size: 1.45rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+}

@@ -1,0 +1,124 @@
+.bestselling {
+  padding: 4.5rem 6%;
+  background: var(--ivory);
+}
+
+.bestselling-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2.5rem;
+}
+
+.section-label {
+  font-size: 0.85rem;
+  color: var(--sage-green);
+  margin-bottom: 0.4rem;
+}
+
+.bestselling-header h2 {
+  font-size: 1.9rem;
+  font-weight: 500;
+  color: var(--forest-ink);
+}
+
+.bestselling-header h2 .italic {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.more-link {
+  font-size: 0.95rem;
+  color: var(--pine-green);
+  font-weight: 500;
+}
+
+/* Carousel */
+.carousel-wrapper {
+  position: relative;
+}
+
+.products-grid {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 1rem;
+  scrollbar-width: none; /* Firefox */
+}
+
+.products-grid::-webkit-scrollbar {
+  display: none; /* Chrome */
+}
+
+.products-grid > * {
+  min-width: 260px;
+  max-width: 280px;
+  flex-shrink: 0;
+}
+
+/* Arrow buttons */
+.arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid #e0e0e0;
+  font-size: 1.6rem;
+  color: var(--forest-ink);
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.arrow-btn:hover {
+  background: var(--pine-green);
+  color: white;
+}
+
+.arrow-btn.left {
+  left: -20px;
+}
+
+.arrow-btn.right {
+  right: -20px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .bestselling {
+    padding: 3rem 5%;
+  }
+
+  .bestselling-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .bestselling-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 1.3rem;
+  }
+
+  .arrow-btn {
+    display: none;
+  }
+}

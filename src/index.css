@@ -1,0 +1,90 @@
+:root {
+  /* Brand Palette - exact from PDF */
+  --pine-green: #286953;
+  --forest-ink: #19211a;
+  --sage-green: #5e6758;
+  --terracotta: #9a5429;
+  --olive-gold: #9f9168;
+  --butter: #dfe1be;
+  --warm-cream: #e4e8d9;
+  --ivory: #ebebe6;
+  --deep-teal: #304f4d;
+
+  /* Typography */
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--forest-ink);
+  background-color: var(--ivory);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--ivory);
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better container padding on small screens */
+
+@media (max-width: 768px) {
+  .bestselling,
+  .categories,
+  .gallery,
+  .reviews,
+  .sustainability,
+  .newsletter,
+  .new-arrival,
+  .feature-pills,
+  .brand-banner {
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+  }
+}
+
+/* Improve product cards on mobile */
+@media (max-width: 600px) {
+  .products-grid {
+    gap: 1.2rem;
+  }
+}
+
+/* Make sure images never overflow */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Better button accessibility */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--pine-green);
+  outline-offset: 3px;
+}

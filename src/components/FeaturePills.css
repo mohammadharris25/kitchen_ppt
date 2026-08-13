@@ -1,0 +1,38 @@
+.feature-pills {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 3rem 6%;
+  background: var(--ivory);
+  flex-wrap: wrap;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: var(--warm-cream);
+  padding: 0.9rem 1.8rem;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--forest-ink);
+  min-width: 200px;
+  justify-content: center;
+}
+
+.pill-icon {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 600px) {
+  .feature-pills {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pill {
+    width: 100%;
+    max-width: 280px;
+  }
+}

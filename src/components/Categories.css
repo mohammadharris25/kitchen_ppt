@@ -1,0 +1,104 @@
+.categories {
+  padding: 4rem 6% 5rem;
+  background: white;
+}
+
+.categories-header {
+  margin-bottom: 2.5rem;
+}
+
+.categories-header h2 {
+  font-size: 1.9rem;
+  font-weight: 500;
+  color: var(--forest-ink);
+  line-height: 1.3;
+}
+
+.categories-header .italic {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.category-card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  height: 320px;
+  cursor: pointer;
+}
+
+.category-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.category-card:hover img {
+  transform: scale(1.06);
+}
+
+.category-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.4rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+  color: white;
+}
+
+.category-info h3 {
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+}
+
+.shop-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.shop-btn:hover {
+  background: white;
+  color: var(--forest-ink);
+}
+
+@media (max-width: 900px) {
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .categories-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .category-card {
+    height: 260px;
+  }
+}
+@media (max-width: 500px) {
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-card {
+    height: 280px;
+  }
+  .categories-header h2 {
+    font-size: 1.45rem;
+  }
+}

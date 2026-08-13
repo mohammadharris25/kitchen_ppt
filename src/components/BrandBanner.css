@@ -1,0 +1,33 @@
+.brand-banner {
+  height: 420px;
+  background-image:
+    linear-gradient(to right, rgba(25, 33, 26, 0.7), rgba(25, 33, 26, 0.4)),
+    url("https://images.unsplash.com/photo-1556912173-3bb406ef7e77?w=1600&q=80");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  padding: 0 8%;
+  color: white;
+}
+
+.banner-overlay {
+  max-width: 520px;
+}
+
+.banner-overlay p {
+  font-size: 1.35rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .brand-banner {
+    height: 340px;
+    padding: 0 5%;
+  }
+
+  .banner-overlay p {
+    font-size: 1.15rem;
+  }
+}
