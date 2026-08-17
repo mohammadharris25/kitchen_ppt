@@ -1,0 +1,139 @@
+.payment-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 400;
+  padding: 1rem;
+}
+
+.payment-modal {
+  background: white;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 440px;
+  padding: 1.8rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.payment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.payment-header h2 {
+  font-size: 1.4rem;
+  color: var(--forest-ink);
+}
+
+.payment-amount {
+  background: var(--ivory);
+  padding: 0.9rem 1.1rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+  color: var(--forest-ink);
+}
+
+.payment-amount strong {
+  color: var(--pine-green);
+  font-size: 1.2rem;
+}
+
+.payment-methods {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.payment-methods button {
+  flex: 1;
+  padding: 0.7rem 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.payment-methods button.active {
+  background: var(--pine-green);
+  color: white;
+  border-color: var(--pine-green);
+}
+
+.form-group {
+  margin-bottom: 1.1rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+  color: var(--sage-green);
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--pine-green);
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.pay-btn {
+  width: 100%;
+  background: var(--pine-green);
+  color: white;
+  padding: 0.95rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.pay-btn:hover {
+  background: #1f5240;
+}
+
+.pay-btn:disabled {
+  background: #888;
+  cursor: not-allowed;
+}

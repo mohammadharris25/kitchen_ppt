@@ -12,35 +12,52 @@ import Sustainability from "./components/Sustainability";
 import Newsletter from "./components/Newsletter";
 import Footer from "./components/Footer";
 import CartDrawer from "./components/CartDrawer";
+import PaymentModal from "./components/PaymentModal";
 import OrderSuccess from "./components/OrderSuccess";
 import Toast from "./components/Toast";
 import { useCart } from "./context/CartContext";
 
 function App() {
   const { cartCount, items, subtotal, clearCart } = useCart();
+
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
   const [showOrderSuccess, setShowOrderSuccess] = useState(false);
   const [lastOrder, setLastOrder] = useState({ items: [], total: 0 });
   const [toast, setToast] = useState({ message: "", visible: false });
 
-  const showToast = (msg) => setToast({ message: msg, visible: true });
+  const showToast = (message) => {
+    setToast({ message, visible: true });
+  };
 
+  const scrollTo = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // When user clicks Checkout in Cart Drawer
   const handleCheckout = () => {
     if (items.length === 0) return;
+    setIsCartOpen(false);
+    setShowPayment(true);
+  };
 
-    // Save order details before clearing
+  // After successful payment
+  const handlePaymentSuccess = () => {
     setLastOrder({
       items: [...items],
       total: subtotal,
     });
-
-    clearCart(); // Clear the cart
-    setIsCartOpen(false); // Close drawer
-    setShowOrderSuccess(true); // Show success modal
+    clearCart();
+    setShowPayment(false);
+    setShowOrderSuccess(true);
   };
 
   return (
     <div className="app">
+      {/* ========== NAVBAR ========== */}
       <Navbar
         cartCount={cartCount}
         onCartClick={() => setIsCartOpen(true)}
@@ -48,43 +65,44 @@ function App() {
         onAccountClick={() => showToast("Account feature coming soon!")}
       />
 
-      <Hero
-        onShopClick={() =>
-          document
-            .getElementById("bestsellers")
-            ?.scrollIntoView({ behavior: "smooth" })
-        }
-      />
+      {/* ========== MAIN SECTIONS ========== */}
+      <Hero onShopClick={() => scrollTo("bestsellers")} />
       <Bestselling />
       <BrandBanner />
       <FeaturePills />
+
       <Categories
         onCategoryClick={(name) => {
-          showToast(`Exploring ${name}`);
-          document
-            .getElementById("bestsellers")
-            ?.scrollIntoView({ behavior: "smooth" });
+          showToast(Exploring`${name}`);
+          scrollTo("bestsellers");
         }}
       />
-      <NewArrival
-        onExplore={() =>
-          document
-            .getElementById("bestsellers")
-            ?.scrollIntoView({ behavior: "smooth" })
-        }
-      />
+
+      <NewArrival onExplore={() => scrollTo("bestsellers")} />
       <Gallery />
       <Reviews />
       <Sustainability />
+
       <Newsletter onSubscribe={() => showToast("Thanks for subscribing! 🎉")} />
+
       <Footer onJoin={() => showToast("Welcome to the Homedine family!")} />
 
+      {/* ========== CART DRAWER ========== */}
       <CartDrawer
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
         onCheckout={handleCheckout}
       />
 
+      {/* ========== PAYMENT MODAL ========== */}
+      <PaymentModal
+        isOpen={showPayment}
+        onClose={() => setShowPayment(false)}
+        total={subtotal}
+        onPaymentSuccess={handlePaymentSuccess}
+      />
+
+      {/* ========== ORDER SUCCESS ========== */}
       <OrderSuccess
         isOpen={showOrderSuccess}
         onClose={() => setShowOrderSuccess(false)}
@@ -92,6 +110,7 @@ function App() {
         orderTotal={lastOrder.total}
       />
 
+      {/* ========== TOAST ========== */}
       <Toast
         message={toast.message}
         isVisible={toast.visible}
