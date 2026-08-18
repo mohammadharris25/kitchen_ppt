@@ -12,17 +12,23 @@ function cartReducer(state, action) {
       const product = action.payload;
       const productId = String(product.id);
 
-      // Check if item already exists in cart
-      const alreadyInCart = state.items.some(
+      const existingItem = state.items.find(
         (item) => String(item.id) === productId,
       );
 
-      // If already in cart → do nothing
-      if (alreadyInCart) {
-        return state;
+      if (existingItem) {
+        // Product already in cart → increase quantity
+        return {
+          ...state,
+          items: state.items.map((item) =>
+            String(item.id) === productId
+              ? { ...item, quantity: item.quantity + 1 }
+              : item,
+          ),
+        };
       }
 
-      // If new item → add it with quantity 1
+      // New product → add with quantity 1
       return {
         ...state,
         items: [
@@ -90,11 +96,10 @@ export function CartProvider({ children }) {
     localStorage.setItem("homedine-cart", JSON.stringify(state));
   }, [state]);
 
-  const cartCount = state.items.reduce(
-    (total, item) => total + item.quantity,
-    0,
-  );
+  // Badge shows number of unique products
+  const cartCount = state.items.length;
 
+  // Total price
   const subtotal = state.items.reduce(
     (total, item) => total + item.price * item.quantity,
     0,
