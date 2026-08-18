@@ -3,57 +3,73 @@ import { createContext, useContext, useReducer, useEffect } from "react";
 const CartContext = createContext();
 
 const initialState = {
-  items: [], // { id, name, price, image, quantity }
+  items: [],
 };
 
 function cartReducer(state, action) {
   switch (action.type) {
     case "ADD_ITEM": {
-      const existing = state.items.find(
-        (item) => item.id === action.payload.id,
+      const product = action.payload;
+      const productId = String(product.id);
+
+      // Check if item already exists in cart
+      const alreadyInCart = state.items.some(
+        (item) => String(item.id) === productId,
       );
 
-      if (existing) {
-        return {
-          ...state,
-          items: state.items.map((item) =>
-            item.id === action.payload.id
-              ? { ...item, quantity: item.quantity + 1 }
-              : item,
-          ),
-        };
+      // If already in cart → do nothing
+      if (alreadyInCart) {
+        return state;
       }
 
+      // If new item → add it with quantity 1
       return {
         ...state,
-        items: [...state.items, { ...action.payload, quantity: 1 }],
+        items: [
+          ...state.items,
+          {
+            id: productId,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            quantity: 1,
+          },
+        ],
       };
     }
 
     case "REMOVE_ITEM":
       return {
         ...state,
-        items: state.items.filter((item) => item.id !== action.payload),
+        items: state.items.filter(
+          (item) => String(item.id) !== String(action.payload),
+        ),
       };
 
     case "UPDATE_QUANTITY": {
       const { id, quantity } = action.payload;
-      if (quantity < 1) {
+      const itemId = String(id);
+
+      if (quantity <= 0) {
         return {
           ...state,
-          items: state.items.filter((item) => item.id !== id),
+          items: state.items.filter((item) => String(item.id) !== itemId),
         };
       }
+
       return {
         ...state,
         items: state.items.map((item) =>
-          item.id === id ? { ...item, quantity } : item,
+          String(item.id) === itemId ? { ...item, quantity } : item,
         ),
       };
     }
 
     case "CLEAR_CART":
-      return { ...state, items: [] };
+      return {
+        ...state,
+        items: [],
+      };
 
     default:
       return state;
@@ -62,21 +78,23 @@ function cartReducer(state, action) {
 
 export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState, () => {
-    // Load from localStorage on start
-    const saved = localStorage.getItem("homedine-cart");
-    return saved ? JSON.parse(saved) : initialState;
+    try {
+      const saved = localStorage.getItem("homedine-cart");
+      return saved ? JSON.parse(saved) : initialState;
+    } catch {
+      return initialState;
+    }
   });
 
-  // Save to localStorage whenever cart changes
   useEffect(() => {
     localStorage.setItem("homedine-cart", JSON.stringify(state));
   }, [state]);
 
-  // Derived values
   const cartCount = state.items.reduce(
     (total, item) => total + item.quantity,
     0,
   );
+
   const subtotal = state.items.reduce(
     (total, item) => total + item.price * item.quantity,
     0,
@@ -93,7 +111,7 @@ export function CartProvider({ children }) {
   const updateQuantity = (id, quantity) => {
     dispatch({ type: "UPDATE_QUANTITY", payload: { id, quantity } });
   };
-  // Clear Cart Function
+
   const clearCart = () => {
     dispatch({ type: "CLEAR_CART" });
   };

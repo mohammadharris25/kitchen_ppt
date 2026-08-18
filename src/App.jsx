@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Loader from "./components/Loader";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Bestselling from "./components/Bestselling";
@@ -20,11 +21,20 @@ import { useCart } from "./context/CartContext";
 function App() {
   const { cartCount, items, subtotal, clearCart } = useCart();
 
+  const [loading, setLoading] = useState(true);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
   const [showOrderSuccess, setShowOrderSuccess] = useState(false);
   const [lastOrder, setLastOrder] = useState({ items: [], total: 0 });
   const [toast, setToast] = useState({ message: "", visible: false });
+
+  // Loader
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const showToast = (message) => {
     setToast({ message, visible: true });
@@ -37,7 +47,7 @@ function App() {
     }
   };
 
-  // When user clicks Checkout in Cart Drawer
+  // When user clicks Checkout
   const handleCheckout = () => {
     if (items.length === 0) return;
     setIsCartOpen(false);
@@ -55,9 +65,14 @@ function App() {
     setShowOrderSuccess(true);
   };
 
+  // Show Loader first
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <div className="app">
-      {/* ========== NAVBAR ========== */}
+      {/* Navbar */}
       <Navbar
         cartCount={cartCount}
         onCartClick={() => setIsCartOpen(true)}
@@ -65,7 +80,7 @@ function App() {
         onAccountClick={() => showToast("Account feature coming soon!")}
       />
 
-      {/* ========== MAIN SECTIONS ========== */}
+      {/* Main Sections */}
       <Hero onShopClick={() => scrollTo("bestsellers")} />
       <Bestselling />
       <BrandBanner />
@@ -87,14 +102,14 @@ function App() {
 
       <Footer onJoin={() => showToast("Welcome to the Homedine family!")} />
 
-      {/* ========== CART DRAWER ========== */}
+      {/* Cart Drawer */}
       <CartDrawer
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
         onCheckout={handleCheckout}
       />
 
-      {/* ========== PAYMENT MODAL ========== */}
+      {/* Payment Modal */}
       <PaymentModal
         isOpen={showPayment}
         onClose={() => setShowPayment(false)}
@@ -102,7 +117,7 @@ function App() {
         onPaymentSuccess={handlePaymentSuccess}
       />
 
-      {/* ========== ORDER SUCCESS ========== */}
+      {/* Order Success */}
       <OrderSuccess
         isOpen={showOrderSuccess}
         onClose={() => setShowOrderSuccess(false)}
@@ -110,7 +125,7 @@ function App() {
         orderTotal={lastOrder.total}
       />
 
-      {/* ========== TOAST ========== */}
+      {/* Toast Notification */}
       <Toast
         message={toast.message}
         isVisible={toast.visible}

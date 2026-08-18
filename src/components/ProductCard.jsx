@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
       </div>
 
       <div className="product-colors">
-        {product.colors.map((color, index) => (
+        {product.colors?.map((color, index) => (
           <span
             key={index}
             className="color-dot"
